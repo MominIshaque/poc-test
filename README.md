@@ -1,4 +1,4 @@
-# MyApp Deployment on Kubernetes with Jenkins CI/CD
+# MyApp Deployment on Kubernetes with Jenkins CI/CD.
 
 ## 📌 Project Overview
 This project demonstrates a complete CI/CD pipeline using **Jenkins**, **Docker**, **Amazon ECR**, and **Kubernetes (EKS)**.  
