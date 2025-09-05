@@ -6,7 +6,7 @@ The pipeline automatically builds a Docker image from the source code, pushes it
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Structure.
 ```
 .
 ├── Dockerfile        # Defines how to build the application image
