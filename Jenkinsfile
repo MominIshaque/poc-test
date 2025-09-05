@@ -45,10 +45,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
               withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-               sh '''
-                  sed -i 's|<IMAGE>|905418253962.dkr.ecr.us-west-2.amazonaws.com/myapp:3|g' k8s/deployment.yml
-                  kubectl apply -n default -f k8s/deployment.yml
+                sh '''
+                  sed -i "s|<IMAGE>|$IMAGE_REPO:$IMAGE_TAG|g" k8s/deployment.yml
+                  kubectl apply -n $K8S_NAMESPACE -f k8s/deployment.yml
                 '''
+              }
             }
         }
     }
