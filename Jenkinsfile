@@ -44,15 +44,10 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh '''
-                  # Replace placeholder <IMAGE> in deployment.yml with actual image
-                  sed -i "s|<IMAGE>|$IMAGE_REPO:$IMAGE_TAG|g" k8s/deployment.yml
-
-                  # Apply to Kubernetes
-                  kubectl apply -n $K8S_NAMESPACE -f k8s/deployment.yml
-
-                  # Verify rollout
-                  kubectl rollout status deployment/myapp-deployment -n $K8S_NAMESPACE
+              withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+               sh '''
+                  sed -i 's|<IMAGE>|905418253962.dkr.ecr.us-west-2.amazonaws.com/myapp:3|g' k8s/deployment.yml
+                  kubectl apply -n default -f k8s/deployment.yml
                 '''
             }
         }
